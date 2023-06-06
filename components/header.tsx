@@ -1,15 +1,20 @@
 import PageNavigation from "./page-navigation";
 import { Icons } from "@/components/icons";
+import { Container } from "@/components/ui/container";
+import { Title } from "@/components/ui/title";
 
 const Header = () => {
   return (
-    <header className="flex items-center justify-between w-screen max-w-4xl px-10 mx-auto my-10">
-      <h3 className="flex items-center flex-1 h-full font-semibold text-primary">
+    <Container
+      as="header"
+      className="flex items-center justify-between w-screen min-h-0 p-10"
+    >
+      <Title level="logo" className="">
         <Icons.logo />
         JobJourney
-      </h3>
+      </Title>
       <PageNavigation />
-    </header>
+    </Container>
   );
 };
 

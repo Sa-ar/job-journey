@@ -55,7 +55,7 @@ const PageNavigation = () => {
         <NavigationMenuList
           className={cn(
             "absolute block origin-top-right -right-14 top-6 md:static md:flex md:scale-100 transition-all",
-            isMobile && !isMenuOpen && "scale-0"
+            !isMenuOpen && "scale-0"
           )}
         >
           <NavigationMenuItem className="m-1">
