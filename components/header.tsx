@@ -1,7 +1,7 @@
-import PageNavigation from "./page-navigation";
 import { Icons } from "@/components/icons";
 import { Container } from "@/components/ui/container";
 import { Title } from "@/components/ui/title";
+import { UserButton } from "@clerk/nextjs";
 
 const Header = () => {
   return (
@@ -11,9 +11,10 @@ const Header = () => {
     >
       <Title level="logo" className="">
         <Icons.logo />
-        JobJourney
+        <span className="hidden md:inline-block">JobJourney</span>
       </Title>
-      <PageNavigation />
+
+      <UserButton afterSignOutUrl="/" />
     </Container>
   );
 };
