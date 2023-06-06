@@ -6,9 +6,9 @@ import React from "react";
 const titleVariants = cva("transition-colors", {
   variants: {
     level: {
-      default: "text-primary text-xl font-semibold",
-      main: "text-primary text-3xl font-bold",
-      sub: "text-slate-500 text-lg font-medium",
+      default: "text-primary text-xl font-semibold mb-5",
+      main: "text-primary text-3xl font-bold mb-5",
+      sub: "text-slate-500 text-lg font-medium mb-5",
       logo: "text-primary text-lg font-semibold flex items-center flex-1 h-full",
     },
   },

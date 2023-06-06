@@ -5,6 +5,9 @@ import {
   Twitter,
   Menu,
   X,
+  Edit2,
+  ChevronRight,
+  Trash,
   type Icon as LucideIcon,
 } from "lucide-react";
 
@@ -16,6 +19,9 @@ export const Icons = {
   twitter: Twitter,
   menu: Menu,
   x: X,
+  edit: Edit2,
+  advance: ChevronRight,
+  trash: Trash,
   logo: (props: LucideProps) => (
     <svg
       width="32"
