@@ -18,7 +18,7 @@ export default function Home() {
         name="Company"
         steps={steps}
         position="Frontend engineer"
-        currentStep={5}
+        currentStep={1}
       />
     </Container>
   );

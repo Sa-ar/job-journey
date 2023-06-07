@@ -5,6 +5,11 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Icons } from "./icons";
@@ -34,18 +39,24 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
           </Button>
         </CardTitle>
       </CardHeader>
-      <CardContent className="items-center w-full">
-        <div className="justify-between hidden h-full gap-2 md:flex">
-          {steps.map((step) => (
-            <span key={step} className="text-sm text-center">
-              {step}
-            </span>
-          ))}
-        </div>
-        <Progress value={(currentStep / steps.length) * 100} />
+      <CardContent className="relative flex w-full">
+        <HoverCard>
+          <HoverCardTrigger asChild>
+            <Progress value={(currentStep / steps.length) * 100} />
+          </HoverCardTrigger>
+          <HoverCardContent>
+            {steps[currentStep - 1] && (
+              <span className="text-center">{steps[currentStep - 1]}</span>
+            )}
+          </HoverCardContent>
+        </HoverCard>
       </CardContent>
       <CardFooter className="justify-between gap-2">
-        <Button variant="destructive" title="Failed">
+        <Button
+          variant="outline"
+          className="text-red-600 border-red-200 hover:text-red-700 hover:bg-red-100"
+          title="Failed"
+        >
           <Icons.trash height={16} />
         </Button>
         <Button title="Advance">
