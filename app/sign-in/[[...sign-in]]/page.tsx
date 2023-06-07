@@ -3,7 +3,7 @@ import { SignIn } from "@clerk/nextjs";
 
 export default function Page() {
   return (
-    <Container>
+    <Container className="grid place-items-center">
       <SignIn />
     </Container>
   );

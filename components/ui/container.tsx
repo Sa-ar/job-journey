@@ -9,7 +9,10 @@ const Container = forwardRef<HTMLHeadingElement, ContainerProps>(
   ({ as: Component = "main", children, className, ...props }, ref) => {
     return (
       <Component
-        className={cn("min-h-screen px-10 mx-auto max-w-4xl", className)}
+        className={cn(
+          "h-full px-10 mx-auto max-w-4xl flex-1 w-screen",
+          className
+        )}
         {...props}
         ref={ref}
       >
