@@ -1,0 +1,81 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
+  "version": "5",
+  "dialect": "mysql",
+  "tables": {
+    "processes": {
+      "name": "processes",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "int",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "autoincrement": false,
+          "name": "user_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "company": {
+          "autoincrement": false,
+          "name": "company",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "position": {
+          "autoincrement": false,
+          "name": "position",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "steps": {
+          "autoincrement": false,
+          "name": "steps",
+          "type": "json",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "current_step_index": {
+          "default": 0,
+          "autoincrement": false,
+          "name": "current_step_index",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_failed": {
+          "default": 0,
+          "autoincrement": false,
+          "name": "is_failed",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_deleted": {
+          "default": 0,
+          "autoincrement": false,
+          "name": "is_deleted",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {},
+      "indexes": {},
+      "foreignKeys": {}
+    }
+  },
+  "schemas": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}
