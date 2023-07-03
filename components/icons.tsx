@@ -8,6 +8,7 @@ import {
   Edit2,
   ChevronRight,
   Trash,
+  Plus,
   type Icon as LucideIcon,
 } from "lucide-react";
 
@@ -22,6 +23,7 @@ export const Icons = {
   edit: Edit2,
   advance: ChevronRight,
   trash: Trash,
+  plus: Plus,
   logo: (props: LucideProps) => (
     <svg
       width="32"

@@ -1,25 +1,13 @@
-import CompanyCard from "@/components/company-card";
-import { Container } from "@/components/ui/container";
-import { Title } from "@/components/ui/title";
+import Link from "next/link";
 
-const steps = [
-  "Phone Interview",
-  "Home Assignment",
-  "Technical Interview",
-  "Manager Interview",
-  "HR Interview",
-];
-
-export default function Home() {
+export default async function Home() {
   return (
-    <Container>
-      <Title level="default">Processes</Title>
-      <CompanyCard
-        name="Company"
-        steps={steps}
-        position="Frontend engineer"
-        currentStep={1}
-      />
-    </Container>
+    <>
+      Hello! Welcome to JobJourney!
+      <br />
+      There will be dashboard here
+      <br />
+      for now you can go to <Link href="/processes">Processes</Link>
+    </>
   );
 }

@@ -20,15 +20,9 @@ export interface CompanyCardProps {
   name: string;
   position: string;
   steps: Step[];
-  currentStep: number;
 }
 
-const CompanyCard: React.FC<CompanyCardProps> = ({
-  name,
-  position,
-  currentStep,
-  steps,
-}) => {
+const CompanyCard: React.FC<CompanyCardProps> = ({ name, position, steps }) => {
   return (
     <Card className="w-full">
       <CardHeader>
@@ -40,7 +34,7 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
         </CardTitle>
       </CardHeader>
       <CardContent className="relative flex w-full">
-        <HoverCard>
+        {/* <HoverCard>
           <HoverCardTrigger asChild>
             <Progress value={(currentStep / steps.length) * 100} />
           </HoverCardTrigger>
@@ -49,7 +43,7 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
               <span className="text-center">{steps[currentStep - 1]}</span>
             )}
           </HoverCardContent>
-        </HoverCard>
+        </HoverCard> */}
       </CardContent>
       <CardFooter className="justify-between gap-2">
         <Button
