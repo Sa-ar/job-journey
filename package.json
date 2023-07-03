@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "introspect": "drizzle-kit introspect:mysql"
+    "introspect": "drizzle-kit introspect:mysql",
+    "studio": "drizzle-kit studio"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.19.1",
@@ -49,6 +50,6 @@
   "devDependencies": {
     "@types/lodash": "^4.14.195",
     "dotenv": "^16.3.1",
-    "drizzle-kit": "^0.19.2"
+    "drizzle-kit": "^0.19.3"
   }
 }
