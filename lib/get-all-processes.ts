@@ -6,7 +6,7 @@ import { parseProcess } from '@/lib/utils';
 
 export async function getAllProcesses(userId: string): Promise<Process[]> {
   try {
-    const allJobs = await db.select({
+    const allProcesses = await db.select({
       id: processes.id,
       userId: processes.userId,
       company: processes.company,
@@ -15,15 +15,14 @@ export async function getAllProcesses(userId: string): Promise<Process[]> {
       isFailed: processes.isFailed,
     }).from(processes).where(eq(processes.userId, userId)).execute();
 
-    const parsedJobs = allJobs.flatMap((job) => {
-      console.log(job);
-      const validatedJob = parseProcess(job);
-      if (!validatedJob) return [];
+    const parsedProcesses = allProcesses.flatMap((process) => {
+      const validatedProcess = parseProcess(process);
+      if (!validatedProcess) return [];
 
-      return validatedJob satisfies Process;
+      return validatedProcess satisfies Process;
     }, []);
 
-    return parsedJobs;
+    return parsedProcesses;
   } catch (error) {
     console.error(error);
     return [];
