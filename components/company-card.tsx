@@ -12,9 +12,9 @@ import {
 } from "@/components/ui/hover-card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
-import { Icons } from "./icons";
+import { Icons } from "@/components/icons";
 
-export type Step = string;
+import { Step } from "@/types";
 
 export interface CompanyCardProps {
   name: string;

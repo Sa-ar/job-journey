@@ -3,11 +3,11 @@
 import { db } from "@/db/config";
 import { processes } from "@/drizzle/schema";
 
-import { ProcessValues, RawProcess, isError } from "@/types";
+import { ProcessValues, Process, isError } from "@/types";
 
 export async function createNewProcess(userId: string, values: ProcessValues): Promise<string | null> {
   try {
-    const newProcess: Omit<RawProcess, "id"> = {
+    const newProcess = {
       userId,
       company: values.company,
       position: values.position,

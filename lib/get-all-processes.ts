@@ -15,12 +15,17 @@ export async function getAllProcesses(userId: string): Promise<Process[]> {
       isFailed: processes.isFailed,
     }).from(processes).where(eq(processes.userId, userId)).execute();
 
+    console.log("all", allProcesses)
+
     const parsedProcesses = allProcesses.flatMap((process) => {
+      process.steps = JSON.parse(process.steps as string);
       const validatedProcess = parseProcess(process);
       if (!validatedProcess) return [];
 
-      return validatedProcess satisfies Process;
+      return validatedProcess;
     }, []);
+
+    console.log(parsedProcesses);
 
     return parsedProcesses;
   } catch (error) {

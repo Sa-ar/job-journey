@@ -31,9 +31,9 @@ const CompaniesList = () => {
       {processes.map(({ id, company, steps, position }: Process) => (
         <CompanyCard
           key={id}
-          name={company || "No company name"}
-          steps={JSON.parse(steps ?? "[]")}
-          position={position || "No position"}
+          name={company}
+          steps={steps}
+          position={position}
         />
       ))}
     </div>
