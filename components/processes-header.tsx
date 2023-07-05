@@ -45,8 +45,8 @@ const ProcessesHeader: React.FC = () => {
           userId: user.id,
           company: values.company,
           position: values.position,
-          steps: JSON.stringify(values.steps),
-          isFailed: 0,
+          steps: values.steps,
+          isFailed: false,
         },
       ],
       {

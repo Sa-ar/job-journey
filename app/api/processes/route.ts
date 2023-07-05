@@ -28,7 +28,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json("Not enough data provided", { status: 400 });
   }
 
-  await createNewProcess(userId, parsedBody.data);
+  const res = await createNewProcess(userId, parsedBody.data);
+  if (res) {
+    return NextResponse.json({ message: res }, { status: 500 });
+  }
 
   return NextResponse.json({ process: { ...parsedBody.data, userId, isFailed: false } });
 }

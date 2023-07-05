@@ -3,11 +3,11 @@
 import { db } from "@/db/config";
 import { processes } from "@/drizzle/schema";
 
-import { Process, ProcessValues } from "@/types";
+import { ProcessValues, RawProcess, isError } from "@/types";
 
-export async function createNewProcess(userId: string, values: ProcessValues): Promise<string> {
+export async function createNewProcess(userId: string, values: ProcessValues): Promise<string | null> {
   try {
-    const newProcess: Omit<Process, "id"> = {
+    const newProcess: Omit<RawProcess, "id"> = {
       userId,
       company: values.company,
       position: values.position,
@@ -16,11 +16,11 @@ export async function createNewProcess(userId: string, values: ProcessValues): P
     }
     await db.insert(processes).values(newProcess).execute();
 
-    return "success";
+    return null;
   } catch (error) {
     console.log('error creating new process');
     console.error(error);
 
-    return typeof error === "object" && error !== null && "message" in error ? String(error.message) : 'error creating new process';
+    return isError(error) ? error.message : 'error creating new process';
   }
 }

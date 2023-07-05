@@ -1,19 +1,12 @@
 import z from "zod";
 
-const literalSchema = z.union([z.string(), z.number(), z.boolean(), z.null()]);
-type Literal = z.infer<typeof literalSchema>;
-type Json = Literal | { [key: string]: Json } | Json[];
-const jsonSchema: z.ZodType<Json> = z.lazy(() =>
-  z.union([literalSchema, z.array(jsonSchema), z.record(jsonSchema)])
-);
-
-export const processSchema = z.object({
-  id: z.number().min(1),
-  userId: z.string(),
-  company: z.string().min(2),
-  position: z.string().min(2),
-  steps: jsonSchema,
-  isFailed: z.number(),
+export const jsonSchema = z.string().refine((value) => {
+  try {
+    JSON.parse(value);
+    return true;
+  } catch (error) {
+    return false;
+  }
 });
 
 export const stepSchema = z.object({
@@ -28,9 +21,40 @@ export const processValuesSchema = z.object({
   steps: z.array(stepSchema).min(1),
 });
 
+export const errorSchema = z.object({
+  message: z.string(),
+});
 
-export type Process = z.infer<typeof processSchema>;
+export const rawProcessSchema = z.object({
+  id: z.number().min(1),
+  userId: z.string(),
+  company: z.string().min(2),
+  position: z.string().min(2),
+  steps: jsonSchema,
+  isFailed: z.number().gte(0).lte(1),
+});
+
+export const processSchema = z.object({
+  id: z.number().min(1),
+  userId: z.string(),
+  company: z.string().min(2),
+  position: z.string().min(2),
+  steps: z.array(stepSchema),
+  isFailed: z.boolean(),
+});
+
 
 export type Step = z.infer<typeof stepSchema>;
 
 export type ProcessValues = z.infer<typeof processValuesSchema>;
+
+export type Error = z.infer<typeof errorSchema>;
+
+export type RawProcess = z.infer<typeof rawProcessSchema>;
+
+export type Process = z.infer<typeof processSchema>;
+
+
+export function isError(value: unknown): value is Error {
+  return errorSchema.safeParse(value).success;
+}
