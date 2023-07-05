@@ -11,7 +11,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import StepsList from "@/components/steps-list";
+
+import StepsList from "./steps-list";
 
 import { ProcessValues, Step, processValuesSchema } from "@/types";
 

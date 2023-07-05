@@ -2,11 +2,12 @@
 
 import { forwardRef, useState, KeyboardEvent, MouseEvent } from "react";
 
-import { DraggableList } from "@/components/ui/draggable-list";
 import { Input } from "@/components/ui/input";
 import { FormLabel } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { Icons } from "@/components/icons";
+import { Icons } from "@/components/ui/icons";
+
+import { DraggableList } from "./draggable-list";
 
 import { Step } from "@/types";
 

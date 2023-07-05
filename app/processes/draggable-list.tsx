@@ -21,8 +21,10 @@ import {
 } from "@dnd-kit/sortable";
 
 import { cn } from "@/lib/utils";
-import { SortableItem } from "@/components/ui/sortable-item";
-import { Item } from "@/components/ui/item";
+
+import { SortableItem } from "./sortable-item";
+import { Item } from "./item";
+
 import { Step } from "@/types";
 
 export interface DraggableListProps

@@ -1,4 +1,4 @@
-import { Icons } from "@/components/icons";
+import { Icons } from "@/components/ui/icons";
 import { Container } from "@/components/ui/container";
 import { Title } from "@/components/ui/title";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";

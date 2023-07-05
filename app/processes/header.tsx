@@ -15,7 +15,8 @@ import {
 } from "@/components/ui/dialog";
 import { Title } from "@/components/ui/title";
 import AddButton from "@/components/add-button";
-import AddProcessForm from "@/components/add-process-form";
+
+import AddProcessForm from "./add-form";
 
 import { Process, ProcessValues } from "@/types";
 

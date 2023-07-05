@@ -10,6 +10,8 @@ import {
   Trash,
   Plus,
   GripVertical,
+  ChevronsRight,
+  ArrowUpDown,
   type Icon as LucideIcon,
 } from "lucide-react";
 
@@ -26,6 +28,8 @@ export const Icons = {
   trash: Trash,
   plus: Plus,
   grip: GripVertical,
+  chevronRight: ChevronsRight,
+  arrowUpDown: ArrowUpDown,
   logo: (props: LucideProps) => (
     <svg
       width="32"

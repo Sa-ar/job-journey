@@ -3,12 +3,14 @@
 import React from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-
-import { Item } from "@/components/ui/item";
 import { UniqueIdentifier } from "@dnd-kit/core";
+
 import { cn } from "@/lib/utils";
-import { Icons } from "@/components/icons";
-import { Button } from "./button";
+
+import { Icons } from "@/components/ui/icons";
+import { Button } from "@/components/ui/button";
+
+import { Item } from "./item";
 
 interface SortableItemProps {
   id: UniqueIdentifier;

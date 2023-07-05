@@ -1,9 +1,10 @@
-import { ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { type ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
+
 import { Process, rawProcessSchema, stepSchema } from "@/types";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return twMerge(clsx(inputs))
 }
 
 export function parseProcess(rawProcess: unknown, handleError: (error: { error: boolean, message: string }) => void = () => { }) {
@@ -14,7 +15,6 @@ export function parseProcess(rawProcess: unknown, handleError: (error: { error: 
   };
 
   const rawSteps = JSON.parse(validatedProcess.data.steps);
-  console.log(typeof rawSteps, Array.from(JSON.parse(validatedProcess.data.steps)), rawProcess);
 
   const steps = rawSteps.map((step: unknown) => {
     const validatedStep = stepSchema.safeParse(step);
