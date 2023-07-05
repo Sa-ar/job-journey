@@ -3,6 +3,7 @@ import { auth } from "@clerk/nextjs";
 
 import { createNewProcess } from "@/lib/create-new-process";
 import { getAllProcesses } from "@/lib/get-all-processes";
+import { processValuesSchema } from "@/types";
 
 export async function GET() {
   const { userId } = auth();
@@ -21,15 +22,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json("Unauthorized", { status: 401 });
   }
 
-
   const [body] = await await req.json();
-  if (!body) {
-    return NextResponse.json("No body provided", { status: 400 });
+  const parsedBody = processValuesSchema.safeParse(body);
+  if (!parsedBody.success) {
+    return NextResponse.json("Not enough data provided", { status: 400 });
   }
 
-  const { company, position, steps, isFailed } = body;
+  await createNewProcess(userId, parsedBody.data);
 
-  await createNewProcess(userId, { company, position, steps });
-
-  return NextResponse.json({ process: { userId, company, position, steps, isFailed } });
+  return NextResponse.json({ process: { ...parsedBody.data, userId, isFailed: false } });
 }

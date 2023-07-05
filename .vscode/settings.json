@@ -6,6 +6,7 @@
     "lucide",
     "planetscale",
     "tanstack",
-    "tinyint"
+    "tinyint",
+    "toastify"
   ]
 }

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 import {
   Dialog,
@@ -16,7 +17,7 @@ import { Title } from "@/components/ui/title";
 import AddButton from "@/components/add-button";
 import AddProcessForm from "@/components/add-process-form";
 
-import { Process } from "@/types";
+import { Process, ProcessValues } from "@/types";
 
 function postProcesses(processes: Omit<Process, "id">[]) {
   return axios.post("/api/processes", processes);
@@ -35,28 +36,29 @@ const ProcessesHeader: React.FC = () => {
     },
   });
 
-  const handleAddProcess = (values: {
-    position: string;
-    company: string;
-    steps: {
-      name: string;
-      description: string;
-      isDone: boolean;
-    }[];
-  }) => {
+  const handleAddProcess = (values: ProcessValues) => {
     if (!user) return;
 
-    mutation.mutate([
+    mutation.mutate(
+      [
+        {
+          userId: user.id,
+          company: values.company,
+          position: values.position,
+          steps: JSON.stringify(values.steps),
+          isFailed: 0,
+        },
+      ],
       {
-        userId: user.id,
-        company: values.company,
-        position: values.position,
-        steps: JSON.stringify(values.steps),
-        isFailed: 0,
-      },
-    ]);
-
-    setIsFormOpen(false);
+        onSuccess: () => {
+          setIsFormOpen(false);
+          toast.success("Process added");
+        },
+        onError: () => {
+          toast.error("Something went wrong");
+        },
+      }
+    );
   };
 
   return (

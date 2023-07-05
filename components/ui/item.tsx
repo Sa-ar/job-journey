@@ -4,10 +4,11 @@ import React, { forwardRef } from "react";
 export interface ItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
   children: React.ReactNode;
   id: string;
+  isDone: boolean;
 }
 
 export const Item = forwardRef<HTMLLIElement, ItemProps>(
-  ({ id, children, className, ...props }, ref) => {
+  ({ id, children, className, isDone, ...props }, ref) => {
     return (
       <li
         {...props}
@@ -15,7 +16,8 @@ export const Item = forwardRef<HTMLLIElement, ItemProps>(
         id={id}
         className={cn(
           "list-none p-3 border rounded flex items-center bg-background",
-          className
+          className,
+          isDone && "bg-green-500 line-through"
         )}
       >
         {children}

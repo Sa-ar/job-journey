@@ -5,8 +5,7 @@ import { processes } from "@/drizzle/schema";
 
 import { Process, ProcessValues } from "@/types";
 
-export async function createNewProcess(userId: string, values: ProcessValues, ...rest: any[]): Promise<string> {
-  console.log(values, rest)
+export async function createNewProcess(userId: string, values: ProcessValues): Promise<string> {
   try {
     const newProcess: Omit<Process, "id"> = {
       userId,

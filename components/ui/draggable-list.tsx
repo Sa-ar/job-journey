@@ -10,6 +10,8 @@ import {
   UniqueIdentifier,
   useSensor,
   useSensors,
+  DragEndEvent,
+  DragStartEvent,
 } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -21,58 +23,50 @@ import {
 import { cn } from "@/lib/utils";
 import { SortableItem } from "@/components/ui/sortable-item";
 import { Item } from "@/components/ui/item";
+import { Step } from "@/types";
 
 export interface DraggableListProps
   extends React.OlHTMLAttributes<HTMLOListElement> {
-  items: (UniqueIdentifier | { id: UniqueIdentifier })[];
-  setItems: React.Dispatch<
-    React.SetStateAction<(UniqueIdentifier | { id: UniqueIdentifier })[]>
-  >;
-  onChange?: ((
-    items: (UniqueIdentifier | { id: UniqueIdentifier })[]
-  ) => void) &
-    React.FormEventHandler<HTMLOListElement>;
+  items: Step[];
+  setItems: (items: Step[]) => void;
 }
 
 const DraggableList = React.forwardRef<HTMLOListElement, DraggableListProps>(
-  ({ className, items, setItems, onChange }, ref) => {
-    const [activeId, setActiveId] = React.useState(null);
+  ({ className, items, setItems }, ref) => {
+    const [activeId, setActiveId] = React.useState<UniqueIdentifier | null>(
+      null
+    );
     const sensors = useSensors(
       useSensor(PointerSensor),
       useSensor(KeyboardSensor, {
         coordinateGetter: sortableKeyboardCoordinates,
       })
     );
+    const activeStep = items.find((item) => item.id === activeId);
 
-    function handleDragStart(event: { active: any }) {
+    function handleDragStart(event: DragStartEvent) {
       const { active } = event;
 
       setActiveId(active.id);
     }
 
-    function handleDragEnd(event: { active: any; over: any }) {
+    function handleDragEnd(event: DragEndEvent) {
       const { active, over } = event;
       if (!over) {
         return;
       }
 
       if (active.id !== over.id) {
-        onChange && onChange(items);
-        setItems((items) => {
-          const oldIndex = items.findIndex((item) =>
-            typeof item === "object"
-              ? item.id === active.id
-              : item === active.id
-          );
-          const newIndex = items.findIndex((item) =>
-            typeof item === "object" ? item.id === over.id : item === over.id
-          );
-
-          return arrayMove(items, oldIndex, newIndex);
-        });
+        const oldIndex = items.findIndex((item) => item.id === active.id);
+        const newIndex = items.findIndex((item) => item.id === over.id);
+        setItems(arrayMove(items, oldIndex, newIndex));
       }
 
       setActiveId(null);
+    }
+
+    function handleDeleteItem(id: UniqueIdentifier) {
+      setItems(items.filter((item) => item.id !== id));
     }
 
     return (
@@ -84,14 +78,25 @@ const DraggableList = React.forwardRef<HTMLOListElement, DraggableListProps>(
       >
         <SortableContext items={items} strategy={verticalListSortingStrategy}>
           <ol className={cn("list-none", className)} ref={ref}>
-            {items.map((id) => {
-              const value = typeof id === "object" ? id.id : id;
-              return <SortableItem key={value} id={value} />;
+            {items.map(({ id, name, isDone }) => {
+              return (
+                <SortableItem
+                  key={id}
+                  id={id}
+                  name={name}
+                  isDone={isDone}
+                  deleteItem={handleDeleteItem}
+                />
+              );
             })}
           </ol>
         </SortableContext>
         <DragOverlay>
-          {activeId ? <Item id={activeId}>{activeId}</Item> : null}
+          {activeStep ? (
+            <Item id={activeStep.id.toString()} isDone={activeStep.isDone}>
+              {activeStep.name}
+            </Item>
+          ) : null}
         </DragOverlay>
       </DndContext>
     );

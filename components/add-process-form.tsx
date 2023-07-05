@@ -1,11 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import z from "zod";
 
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -13,44 +11,32 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import StepsList from "@/components/steps-list";
 
-import { ProcessValues } from "@/types";
-
-const formSchema = z.object({
-  position: z.string().min(2, {
-    message: "Position must be at least 2 characters.",
-  }),
-  company: z.string().min(2, {
-    message: "Company must be at least 2 characters.",
-  }),
-  steps: z.array(
-    z.object({
-      name: z.string().min(2, {
-        message: "Step name must be at least 2 characters.",
-      }),
-      description: z.string().min(2, {
-        message: "Step description must be at least 2 characters.",
-      }),
-      isDone: z.boolean(),
-    })
-  ),
-});
+import { ProcessValues, Step, processValuesSchema } from "@/types";
 
 interface AddProcessFormProps {
-  addProcess: ({ position, company, steps }: ProcessValues) => void;
+  addProcess: (values: ProcessValues) => void;
 }
 
 const AddProcessForm = ({ addProcess }: AddProcessFormProps) => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<ProcessValues>({
+    resolver: zodResolver(processValuesSchema),
     defaultValues: {
       company: "",
       position: "",
-      steps: [],
+      steps: [
+        { name: "Phone interview", id: 1, isDone: false },
+        { name: "Home assignment", id: 2, isDone: false },
+        { name: "Manager interview", id: 3, isDone: false },
+        { name: "Onsite interview", id: 4, isDone: false },
+        { name: "Offer", id: 5, isDone: false },
+        { name: "Hired", id: 6, isDone: false },
+      ],
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: ProcessValues) {
     addProcess(values);
   }
 
@@ -66,9 +52,6 @@ const AddProcessForm = ({ addProcess }: AddProcessFormProps) => {
               <FormControl>
                 <Input placeholder="Google" {...field} />
               </FormControl>
-              <FormDescription>
-                This is the company you are starting a process.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -82,31 +65,32 @@ const AddProcessForm = ({ addProcess }: AddProcessFormProps) => {
               <FormControl>
                 <Input placeholder="Software Engineer" {...field} />
               </FormControl>
-              <FormDescription>
-                This is the position you are applying for.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        {/* 
-        TODO: Add steps input
+
         <FormField
           control={form.control}
           name="steps"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Steps</FormLabel>
-              <FormControl>
-                <Input placeholder="Software Engineer" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is the position you are applying for.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        /> */}
+          render={({ field }) => {
+            return (
+              <FormItem>
+                <FormControl>
+                  <StepsList
+                    {...field}
+                    setSteps={(steps: Step[]) => form.setValue("steps", steps)}
+                    addStep={(step: Step) =>
+                      form.setValue("steps", [...field.value, step])
+                    }
+                    steps={field.value}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
         <Button type="submit">Add Process</Button>
       </form>
     </Form>
