@@ -6,7 +6,6 @@ import {
   ColumnDef,
   ColumnFiltersState,
   SortingState,
-  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -14,15 +13,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 
 import {
@@ -105,7 +97,7 @@ export function DataTable<TData extends { id: string | number }, TValue>({
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id} className="p-0">
                       <Link
-                        href={`/companies/${row.original.id}`}
+                        href={`/processes/${row.original.id}`}
                         key={row.id}
                         className="block w-full h-full p-4"
                       >

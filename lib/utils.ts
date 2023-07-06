@@ -16,7 +16,7 @@ export function parseProcess(rawProcess: unknown, handleError: (error: { error: 
 
   const rawSteps = JSON.parse(validatedProcess.data.steps);
 
-  const steps = rawSteps.map((step: unknown) => {
+  const steps = rawSteps?.map((step: unknown) => {
     const validatedStep = stepSchema.safeParse(step);
 
     if (!validatedStep || !validatedStep.success) {
@@ -24,7 +24,7 @@ export function parseProcess(rawProcess: unknown, handleError: (error: { error: 
     };
 
     return validatedStep.data;
-  });
+  }) ?? rawSteps;
 
   const process: Process = {
     id: validatedProcess.data.id,
