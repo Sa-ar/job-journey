@@ -48,7 +48,7 @@ export function SortableItem({
         id={id.toString()}
         className={cn(
           "list-none p-1 border rounded flex items-center flex-1",
-          className
+          className,
         )}
       >
         <Icons.grip className="h-4 mr-1" />

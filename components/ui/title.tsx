@@ -42,7 +42,7 @@ const Title = React.forwardRef<HTMLHeadingElement, TitleProps>(
         {children}
       </Component>
     );
-  }
+  },
 );
 Title.displayName = "Title";
 

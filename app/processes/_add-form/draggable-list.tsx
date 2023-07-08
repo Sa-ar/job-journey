@@ -36,13 +36,13 @@ export interface DraggableListProps
 const DraggableList = React.forwardRef<HTMLOListElement, DraggableListProps>(
   ({ className, items, setItems }, ref) => {
     const [activeId, setActiveId] = React.useState<UniqueIdentifier | null>(
-      null
+      null,
     );
     const sensors = useSensors(
       useSensor(PointerSensor),
       useSensor(KeyboardSensor, {
         coordinateGetter: sortableKeyboardCoordinates,
-      })
+      }),
     );
     const activeStep = items.find((item) => item.id === activeId);
 
@@ -101,7 +101,7 @@ const DraggableList = React.forwardRef<HTMLOListElement, DraggableListProps>(
         </DragOverlay>
       </DndContext>
     );
-  }
+  },
 );
 
 DraggableList.displayName = "DraggableList";

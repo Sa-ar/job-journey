@@ -27,7 +27,7 @@ type ReceivedValues = {
 const AddProcessForm = ({ onAddProcessSuccess }: AddProcessFormProps) => {
   const form = useForm<ReceivedValues>({
     resolver: zodResolver(
-      z.object({ company: z.string(), positionTitle: z.string() })
+      z.object({ company: z.string(), positionTitle: z.string() }),
     ),
     defaultValues: {
       company: "",

@@ -3,7 +3,7 @@ import { InferModel, eq } from "drizzle-orm";
 import { db } from "./config";
 
 export type Company = InferModel<typeof companies>; // return type when queried
-export type NewCompany = InferModel<typeof companies, 'insert'>; // insert type
+export type NewCompany = InferModel<typeof companies, "insert">; // insert type
 
 export async function addCompany(company: NewCompany) {
   await db.insert(companies).values(company);

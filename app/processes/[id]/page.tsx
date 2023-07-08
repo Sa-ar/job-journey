@@ -58,7 +58,7 @@ const ProcessPage = async ({ params }: ProcessPageProps) => {
               key={id}
               className={cn(
                 status === "done" && "line-through",
-                "after:content-normal after:content-['_->_'] last:after:content-none"
+                "after:content-normal after:content-['_->_'] last:after:content-none",
               )}
             >
               {name}

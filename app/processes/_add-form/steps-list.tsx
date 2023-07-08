@@ -81,7 +81,7 @@ const StepsList = forwardRef<any, StepsListProps>(
         )}
       </>
     );
-  }
+  },
 );
 StepsList.displayName = "StepsList";
 

@@ -15,13 +15,13 @@ export const Item = forwardRef<HTMLLIElement, ItemProps>(
         id={id}
         className={cn(
           "list-none p-3 border rounded flex items-center bg-background",
-          className
+          className,
         )}
       >
         {children}
       </li>
     );
-  }
+  },
 );
 
 Item.displayName = "Item";

@@ -3,11 +3,16 @@ import { InferModel, eq } from "drizzle-orm";
 import { db } from "./config";
 
 export type Position = InferModel<typeof positions>; // return type when queried
-export type NewPosition = InferModel<typeof positions, 'insert'>; // insert type
+export type NewPosition = InferModel<typeof positions, "insert">; // insert type
 
 export async function addPosition(position: NewPosition) {
-  (await db.insert(positions).values(position).execute());
-  const lastPosition = await db.select().from(positions).orderBy(positions.id).limit(1).execute();
+  await db.insert(positions).values(position).execute();
+  const lastPosition = await db
+    .select()
+    .from(positions)
+    .orderBy(positions.id)
+    .limit(1)
+    .execute();
 
   return lastPosition[0];
 }

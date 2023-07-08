@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "introspect": "drizzle-kit introspect:mysql",
-    "studio": "drizzle-kit studio"
+    "studio": "drizzle-kit studio",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@clerk/nextjs": "^4.21.14",
@@ -57,6 +58,7 @@
   "devDependencies": {
     "@types/lodash": "^4.14.195",
     "dotenv": "^16.3.1",
-    "drizzle-kit": "^0.19.3"
+    "drizzle-kit": "^0.19.3",
+    "prettier": "^3.0.0"
   }
 }

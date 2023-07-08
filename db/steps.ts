@@ -3,7 +3,7 @@ import { InferModel, eq } from "drizzle-orm";
 import { db } from "./config";
 
 export type Step = InferModel<typeof steps>; // return type when queried
-export type NewStep = InferModel<typeof steps, 'insert'>; // insert type
+export type NewStep = InferModel<typeof steps, "insert">; // insert type
 
 export function addStep(step: NewStep) {
   return db.insert(steps).values(step);

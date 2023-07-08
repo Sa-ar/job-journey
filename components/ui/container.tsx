@@ -11,7 +11,7 @@ const Container = forwardRef<HTMLHeadingElement, ContainerProps>(
       <Component
         className={cn(
           "h-full px-10 mx-auto max-w-4xl flex-1 w-screen",
-          className
+          className,
         )}
         {...props}
         ref={ref}
@@ -19,7 +19,7 @@ const Container = forwardRef<HTMLHeadingElement, ContainerProps>(
         {children}
       </Component>
     );
-  }
+  },
 );
 Container.displayName = "Container";
 
