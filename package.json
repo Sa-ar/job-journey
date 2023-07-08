@@ -2,6 +2,9 @@
   "name": "job-journey",
   "version": "0.1.0",
   "private": true,
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,7 +12,8 @@
     "lint": "next lint",
     "introspect": "drizzle-kit introspect:mysql",
     "studio": "drizzle-kit studio",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.21.14",
@@ -59,6 +63,9 @@
     "@types/lodash": "^4.14.195",
     "dotenv": "^16.3.1",
     "drizzle-kit": "^0.19.3",
+    "eslint-config-prettier": "^8.8.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
     "prettier": "^3.0.0"
   }
 }
