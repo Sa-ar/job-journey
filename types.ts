@@ -15,6 +15,12 @@ export const errorSchema = z.object({
 
 export const idSchema = z.number().min(1);
 
+
+export const stepSchema = z.object({
+  id: idSchema,
+  name: z.string().min(2),
+});
+
 export const processPickSchema = z.object({
   id: idSchema,
   position: z.string().min(2),
@@ -28,6 +34,8 @@ export const processPickSchema = z.object({
 export type Error = z.infer<typeof errorSchema>;
 
 export type Id = z.infer<typeof idSchema>;
+
+export type Step = z.infer<typeof stepSchema>;
 
 export type ProcessPick = z.infer<typeof processPickSchema>;
 
