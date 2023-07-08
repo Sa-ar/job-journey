@@ -8,8 +8,9 @@ import { Icons } from "@/components/ui/icons";
 
 import { DraggableList } from "./draggable-list";
 
-import { NewStep, Step } from "@/types";
+import { Step } from "@/types";
 import { Label } from "@/components/ui/label";
+import { NewStep } from "@/db/steps";
 
 export interface StepsListProps {
   steps: Step[];
