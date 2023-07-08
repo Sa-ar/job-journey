@@ -80,13 +80,12 @@ const DraggableList = React.forwardRef<HTMLOListElement, DraggableListProps>(
       >
         <SortableContext items={items} strategy={verticalListSortingStrategy}>
           <ol className={cn("list-none", className)} ref={ref}>
-            {items.map(({ id, name, isDone }) => {
+            {items.map(({ id, name }) => {
               return (
                 <SortableItem
                   key={id}
                   id={id}
                   name={name}
-                  isDone={isDone}
                   deleteItem={handleDeleteItem}
                 />
               );
@@ -94,11 +93,11 @@ const DraggableList = React.forwardRef<HTMLOListElement, DraggableListProps>(
           </ol>
         </SortableContext>
         <DragOverlay>
-          {activeStep ? (
-            <Item id={activeStep.id.toString()} isDone={activeStep.isDone}>
-              {activeStep.name}
+          {Boolean(activeStep) && (
+            <Item id={activeStep?.id.toString() ?? "0"}>
+              {activeStep?.name}
             </Item>
-          ) : null}
+          )}
         </DragOverlay>
       </DndContext>
     );

@@ -26,13 +26,15 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import { Id } from "@/types";
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   total?: number;
 }
 
-export function DataTable<TData extends { id: string | number }, TValue>({
+export function DataTable<TData extends { id: Id }, TValue>({
   columns,
   data,
   total,

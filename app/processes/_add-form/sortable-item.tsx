@@ -16,7 +16,6 @@ interface SortableItemProps {
   id: UniqueIdentifier;
   name: string;
   className?: string;
-  isDone: boolean;
   deleteItem: (id: UniqueIdentifier) => void;
 }
 
@@ -24,7 +23,6 @@ export function SortableItem({
   id,
   name,
   className,
-  isDone,
   deleteItem,
 }: SortableItemProps) {
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -36,7 +34,6 @@ export function SortableItem({
   };
 
   function onDelete(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    console.log("delete");
     e.stopPropagation();
     deleteItem(id);
   }
@@ -49,7 +46,6 @@ export function SortableItem({
         {...attributes}
         {...listeners}
         id={id.toString()}
-        isDone={isDone}
         className={cn(
           "list-none p-1 border rounded flex items-center flex-1",
           className

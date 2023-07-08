@@ -9,50 +9,27 @@ export const jsonSchema = z.string().refine((value) => {
   }
 });
 
-export const stepSchema = z.object({
-  id: z.union([z.string().min(1), z.number().min(1)]),
-  name: z.string().min(2),
-  isDone: z.boolean(),
-});
-
-export const processValuesSchema = z.object({
-  position: z.string().min(2),
-  company: z.string().min(2),
-  steps: z.array(stepSchema).min(1),
-});
-
 export const errorSchema = z.object({
   message: z.string(),
 });
 
-export const rawProcessSchema = z.object({
-  id: z.number().min(1),
-  userId: z.string(),
-  company: z.string().min(2),
+export const idSchema = z.number().min(1);
+
+export const processPickSchema = z.object({
+  id: idSchema,
   position: z.string().min(2),
-  steps: jsonSchema,
-  isFailed: z.number().gte(0).lte(1),
+  company: z.string().min(2),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  status: z.string(),
 });
 
-export const processSchema = z.object({
-  id: z.number().min(1),
-  userId: z.string(),
-  company: z.string().min(2),
-  position: z.string().min(2),
-  steps: z.array(stepSchema),
-  isFailed: z.boolean(),
-});
-
-
-export type Step = z.infer<typeof stepSchema>;
-
-export type ProcessValues = z.infer<typeof processValuesSchema>;
 
 export type Error = z.infer<typeof errorSchema>;
 
-export type RawProcess = z.infer<typeof rawProcessSchema>;
+export type Id = z.infer<typeof idSchema>;
 
-export type Process = z.infer<typeof processSchema>;
+export type ProcessPick = z.infer<typeof processPickSchema>;
 
 
 export function isError(value: unknown): value is Error {

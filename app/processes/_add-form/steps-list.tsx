@@ -3,18 +3,18 @@
 import { forwardRef, useState, KeyboardEvent, MouseEvent } from "react";
 
 import { Input } from "@/components/ui/input";
-import { FormLabel } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/ui/icons";
 
 import { DraggableList } from "./draggable-list";
 
-import { Step } from "@/types";
+import { NewStep, Step } from "@/types";
+import { Label } from "@/components/ui/label";
 
 export interface StepsListProps {
   steps: Step[];
-  setSteps: (steps: Step[]) => void;
-  addStep: (step: Step) => void;
+  setSteps: (steps: NewStep[]) => void;
+  addStep: (step: NewStep) => void;
 }
 
 const StepsList = forwardRef<any, StepsListProps>(
@@ -28,7 +28,9 @@ const StepsList = forwardRef<any, StepsListProps>(
         const name = e.currentTarget.value.trim();
         if (!name) return;
 
-        addStep({ name, id: steps.length + 1, isDone: false });
+        addStep({
+          name,
+        });
 
         e.currentTarget.value = "";
         setHideInput(true);
@@ -48,7 +50,7 @@ const StepsList = forwardRef<any, StepsListProps>(
     return (
       <>
         <header className="flex items-center justify-between">
-          <FormLabel>Steps</FormLabel>
+          <Label>Steps</Label>
           <Button
             onClick={handleAddItem}
             title="Add step"

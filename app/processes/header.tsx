@@ -2,9 +2,7 @@
 
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-import { toast } from "react-toastify";
+import { useQueryClient } from "@tanstack/react-query";
 
 import {
   Dialog,
@@ -16,50 +14,16 @@ import {
 import { Title } from "@/components/ui/title";
 import AddButton from "@/components/add-button";
 
-import AddProcessForm from "./add-form";
-
-import { Process, ProcessValues } from "@/types";
-
-function postProcesses(processes: Omit<Process, "id">[]) {
-  return axios.post("/api/processes", processes);
-}
+import AddProcessForm from "./_add-form";
 
 const ProcessesHeader: React.FC = () => {
   const { user } = useUser();
   const queryClient = useQueryClient();
   const [isFormOpen, setIsFormOpen] = useState(false);
 
-  const mutation = useMutation({
-    mutationFn: postProcesses,
-    onSuccess: () => {
-      // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ["processes"] });
-    },
-  });
-
-  const handleAddProcess = (values: ProcessValues) => {
-    if (!user) return;
-
-    mutation.mutate(
-      [
-        {
-          userId: user.id,
-          company: values.company,
-          position: values.position,
-          steps: values.steps,
-          isFailed: false,
-        },
-      ],
-      {
-        onSuccess: () => {
-          setIsFormOpen(false);
-          toast.success("Process added");
-        },
-        onError: () => {
-          toast.error("Something went wrong");
-        },
-      }
-    );
+  const onAddProcessSuccess = () => {
+    queryClient.invalidateQueries({ queryKey: ["processes"] });
+    setIsFormOpen(false);
   };
 
   return (
@@ -76,7 +40,7 @@ const ProcessesHeader: React.FC = () => {
         <DialogHeader>
           <DialogTitle>Add Process</DialogTitle>
         </DialogHeader>
-        <AddProcessForm addProcess={handleAddProcess} />
+        <AddProcessForm onAddProcessSuccess={onAddProcessSuccess} />
       </DialogContent>
     </Dialog>
   );

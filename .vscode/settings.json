@@ -2,11 +2,11 @@
   "cSpell.words": [
     "autoincrement",
     "clsx",
+    "datetime",
     "hookform",
     "lucide",
     "planetscale",
     "tanstack",
-    "tinyint",
-    "toastify"
+    "tinyint"
   ]
 }

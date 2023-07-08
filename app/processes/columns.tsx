@@ -1,15 +1,13 @@
 "use client";
 
-import Link from "next/link";
 import { ColumnDef } from "@tanstack/react-table";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Icons } from "@/components/ui/icons";
 
-import { Process } from "@/types";
+import { ProcessPick } from "@/types";
 
-export const columns: ColumnDef<Process>[] = [
+export const columns: ColumnDef<ProcessPick>[] = [
   // {
   //   id: "select",
   //   header: ({ table }) => (
